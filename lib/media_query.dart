@@ -94,7 +94,7 @@ class MediaQueryData {
     this.viewInsets = EdgeInsets.zero,
     this.systemGestureInsets = EdgeInsets.zero,
     this.viewPadding = EdgeInsets.zero,
-    this.physicalDepth = double.maxFinite,
+    this.physicalDepths = double.maxFinite,
     this.alwaysUse24HourFormat = false,
     this.accessibleNavigation = false,
     this.invertColors = false,
@@ -109,7 +109,7 @@ class MediaQueryData {
         assert(viewInsets != null),
         assert(systemGestureInsets != null),
         assert(viewPadding != null),
-        assert(physicalDepth != null),
+        assert(physicalDepths != null),
         assert(alwaysUse24HourFormat != null),
         assert(accessibleNavigation != null),
         assert(invertColors != null),
@@ -123,7 +123,7 @@ class MediaQueryData {
   /// notifications so that you can update your [MediaQueryData] when the
   /// window's metrics change. For example, see
   /// [WidgetsBindingObserver.didChangeMetrics] or [Window.onMetricsChanged].
-  MediaQueryData.fromWindow(ui.Window window)
+  MediaQueryData.fromWindow(ui.Window window,this.physicalDepths)
       : size = window.physicalSize / window.devicePixelRatio,
         devicePixelRatio = window.devicePixelRatio,
         textScaleFactor = window.textScaleFactor,
@@ -132,7 +132,6 @@ class MediaQueryData {
         viewPadding = EdgeInsets.fromWindowPadding(window.viewPadding, window.devicePixelRatio),
         viewInsets = EdgeInsets.fromWindowPadding(window.viewInsets, window.devicePixelRatio),
         systemGestureInsets = EdgeInsets.fromWindowPadding(window.systemGestureInsets, window.devicePixelRatio),
-        physicalDepth = window.physicalDepth,
         accessibleNavigation = window.accessibilityFeatures.accessibleNavigation,
         invertColors = window.accessibilityFeatures.invertColors,
         disableAnimations = window.accessibilityFeatures.disableAnimations,
@@ -296,7 +295,7 @@ class MediaQueryData {
   /// The default value is [double.maxFinite], which is used for platforms that
   /// do not specify a maximum elevation. This property is currently only
   /// expected to be set to a non-default value on Fuchsia.
-  final double physicalDepth;
+  final double physicalDepths;
 
   /// Whether to use 24-hour format when formatting time.
   ///
@@ -388,7 +387,7 @@ class MediaQueryData {
       viewPadding: viewPadding ?? this.viewPadding,
       viewInsets: viewInsets ?? this.viewInsets,
       systemGestureInsets: systemGestureInsets ?? this.systemGestureInsets,
-      physicalDepth: physicalDepth ?? this.physicalDepth,
+      physicalDepths: physicalDepth ?? this.physicalDepths,
       alwaysUse24HourFormat: alwaysUse24HourFormat ?? this.alwaysUse24HourFormat,
       invertColors: invertColors ?? this.invertColors,
       highContrast: highContrast ?? this.highContrast,
@@ -556,7 +555,7 @@ class MediaQueryData {
         && other.padding == padding
         && other.viewPadding == viewPadding
         && other.viewInsets == viewInsets
-        && other.physicalDepth == physicalDepth
+        && other.physicalDepths == physicalDepths
         && other.alwaysUse24HourFormat == alwaysUse24HourFormat
         && other.highContrast == highContrast
         && other.disableAnimations == disableAnimations
@@ -575,7 +574,7 @@ class MediaQueryData {
       padding,
       viewPadding,
       viewInsets,
-      physicalDepth,
+      physicalDepths,
       alwaysUse24HourFormat,
       highContrast,
       disableAnimations,
@@ -595,7 +594,7 @@ class MediaQueryData {
       'padding: $padding',
       'viewPadding: $viewPadding',
       'viewInsets: $viewInsets',
-      'physicalDepth: $physicalDepth',
+      'physicalDepth: $physicalDepths',
       'alwaysUse24HourFormat: $alwaysUse24HourFormat',
       'accessibleNavigation: $accessibleNavigation',
       'highContrast: $highContrast',
